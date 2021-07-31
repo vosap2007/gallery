@@ -70,6 +70,7 @@ const galleryItems = [
 
   const lightboxEl = document.querySelector('.js-lightbox');
   const lightboxImageEl = document.querySelector('.lightbox__image');
+  const lightboxOverlayEl = document.querySelector('.lightbox__overlay');
 
   const buttonEl = document.querySelector('[data-action="close-lightbox"]')
         buttonEl.addEventListener('click', closeModal);
@@ -95,6 +96,8 @@ function createItemCard(galleryItems) {
 galleryEl.innerHTML = createItemCard(galleryItems);
 
 function getBigSize(e) {
+  const imgRight = e.target.closest('.gallery__item').nextElementSibling.lastElementChild.firstElementChild;
+  const imgLeft = e.target.closest('.gallery__item').previousElementSibling.lastElementChild.firstElementChild;
   const element = e.target.dataset.source;
 
   lightboxEl.classList.add('is-open');
@@ -111,7 +114,27 @@ function deleteBigImg() {
 };
 
 function closeModal() {
-  lightboxEl.classList.toggle('is-open');
-  
+  lightboxEl.classList.remove('is-open');
+
   deleteBigImg();
-}
+};
+
+lightboxOverlayEl.addEventListener('click', closeModal);
+
+document.onkeydown = function(e) {
+switch(e.key) {
+  case 'Escape':
+  closeModal();
+    break;
+
+    case 'ArrowLeft':
+      console.log('lllllllllll');
+        break;
+
+        case 'ArrowRight':
+          console.log('rrrrrrrrrrrrrrr');
+            break;
+}};
+
+galleryEl
+
