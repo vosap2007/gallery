@@ -96,9 +96,11 @@ function createItemCard(galleryItems) {
 galleryEl.innerHTML = createItemCard(galleryItems);
 
 function getBigSize(e) {
-  const imgRight = e.target.closest('.gallery__item').nextElementSibling.lastElementChild.firstElementChild;
-  const imgLeft = e.target.closest('.gallery__item').previousElementSibling.lastElementChild.firstElementChild;
   const element = e.target.dataset.source;
+  const imgRight = e.target.closest('.gallery__item').nextElementSibling.lastElementChild.firstElementChild.dataset.source;
+  const imgLeft = e.target.closest('.gallery__item').previousElementSibling.lastElementChild.firstElementChild.dataset.source;
+
+  flipsThroughImages(imgRight, imgLeft);
 
   lightboxEl.classList.add('is-open');
 
@@ -122,19 +124,27 @@ function closeModal() {
 lightboxOverlayEl.addEventListener('click', closeModal);
 
 document.onkeydown = function(e) {
-switch(e.key) {
-  case 'Escape':
-  closeModal();
-    break;
+  if(e.key === "Escape") {
+    closeModal();
+  }
+};
 
-    case 'ArrowLeft':
-      console.log('lllllllllll');
-        break;
+function flipsThroughImages (imgRight, imgLeft) {
+  document.onkeydown = function(e) {
+    switch(e.key) {
+    case 'Escape':
+    closeModal();
+      break;
+    
+      case 'ArrowLeft':
+        addBigImg(imgLeft);
+          break;
+    
+          case 'ArrowRight':
+            addBigImg(imgRight);;
+              break;
+    }};
+}
 
-        case 'ArrowRight':
-          console.log('rrrrrrrrrrrrrrr');
-            break;
-}};
-
-galleryEl
+  
 
